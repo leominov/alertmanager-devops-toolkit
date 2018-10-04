@@ -1,5 +1,15 @@
 # Alertmanager DevOps Toolkit
 
+## Linters
+
+* All routes must contains receiver;
+* All receivers must be used;
+* Receivers must contains `slack_configs`, `email_configs` or `webhook_configs`;
+* Slack `api_url` only in global settings;
+* Slack channels starts with `#` or `@`;
+* Only valid webhook URLs;
+* Only valid Email recipients.
+
 ## Usage
 
 ```
