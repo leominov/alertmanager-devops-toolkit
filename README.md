@@ -1,6 +1,6 @@
 # Alertmanager DevOps Toolkit
 
-## Linters
+## Tool #1. Linter
 
 * All routes must contains receiver;
 * All receivers must be used;
@@ -10,17 +10,24 @@
 * Only valid webhook URLs;
 * Only valid Email recipients.
 
-## Usage
+### Usage
 
 ```
 -lint
     Lint config
 -lint-config string
     Configuration file to lint (default "alertmanager.yml")
+```
+
+## Tool #2. Render
+
+Render given template, `include` and `indent` are supported, useful for categorization of receivers and routes.
+
+### Usage
+
+```
 -render
     Render template
 -render-template string
     Template file to render (default ".alertmanager.tmpl.yml")
--version
-    Prints version and exit
 ```
