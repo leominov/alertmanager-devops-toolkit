@@ -27,13 +27,13 @@ Render given template, `include` and `indent` are supported, useful for categori
 conf/
     teamA/
         routes.yml
-        reciviers.yml
+        receivers.yml
     teamB/
         routes.yml
-        reciviers.yml
+        receivers.yml
     teamC/
         routes.yml
-        reciviers.yml
+        receivers.yml
 ```
 
 And template of configuration file:
