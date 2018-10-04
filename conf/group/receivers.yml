@@ -1,5 +1,7 @@
 ---
 - name: receiver
   slack_configs:
-    - channel: '#channel'
+    - channel: '{{.Values.Channel}}'
+      send_resolved: true
+    - channel: '{{.Group.Channel}}'
       send_resolved: true
