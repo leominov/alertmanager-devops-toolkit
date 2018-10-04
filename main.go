@@ -38,16 +38,24 @@ func GenerateTemplate(filename string, data map[string]interface{}) (string, err
 	return result, nil
 }
 
-func renderTemplate(file string) (string, error) {
+func templateVars() (map[string]interface{}, error) {
 	vars, err := ValuesFromDirectory("./")
+	if err != nil {
+		return nil, err
+	}
+	envs := ValuesFromEnviron()
+	return map[string]interface{}{
+		"Values": vars,
+		"Env":    envs,
+	}, nil
+}
+
+func renderTemplate(file string) (string, error) {
+	vars, err := templateVars()
 	if err != nil {
 		return "", err
 	}
-	envs := ValuesFromEnviron()
-	res, err := GenerateTemplate(file, map[string]interface{}{
-		"Values": vars,
-		"Env":    envs,
-	})
+	res, err := GenerateTemplate(file, vars)
 	if err != nil {
 		return "", err
 	}
