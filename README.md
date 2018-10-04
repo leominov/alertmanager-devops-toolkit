@@ -21,7 +21,54 @@
 
 ## Tool #2. Render
 
-Render given template, `include` and `indent` are supported, useful for categorization of receivers and routes.
+Render given template, `include` and `indent` are supported, useful for categorization of receivers and routes. For example, you have an structure:
+
+```
+conf/
+    teamA/
+        routes.yml
+        reciviers.yml
+    teamB/
+        routes.yml
+        reciviers.yml
+    teamC/
+        routes.yml
+        reciviers.yml
+```
+
+And template of configuration file:
+
+```
+---
+receivers:
+{{ include "conf/*/receivers.yml" . | indent 2 }}
+route:
+  receiver: receiver
+  routes:
+{{ include "conf/*/routes.yml" . | indent 4 }}
+```
+
+After rendering you got:
+
+```
+---
+receivers:
+  # conf/teamA/receivres.yml content
+  ...
+  # conf/teamB/receivres.yml content
+  ...
+  # conf/teamC/receivres.yml content
+  ...
+route:
+  receiver: receiver
+  routes:
+    # conf/teamA/routes.yml content
+    ...
+    # conf/teamB/routes.yml content
+    ...
+    # conf/teamC/routes.yml content
+    ...
+```
 
 ### Usage
 
