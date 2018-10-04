@@ -2,9 +2,6 @@
 # yamllint disable rule:line-length
 # yamllint disable rule:trailing-spaces
 global:
-  # Required by email_configs
-  smtp_smarthost: test.host
-  smtp_from: from@host.com
   # Required by slack_configs
   slack_api_url: AABBCC
 receivers:
