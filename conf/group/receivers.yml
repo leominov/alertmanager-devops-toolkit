@@ -5,3 +5,5 @@
       send_resolved: true
     - channel: '{{.Group.Channel}}'
       send_resolved: true
+      http_config:
+        proxy_url: https://ya.ru

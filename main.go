@@ -49,7 +49,8 @@ type Receiver struct {
 }
 
 type WebhookConfig struct {
-	URL string `yaml:"url"`
+	URL        string      `yaml:"url"`
+	HttpConfig *HttpConfig `yaml:"http_config"`
 }
 
 type EmailConfig struct {
@@ -57,8 +58,13 @@ type EmailConfig struct {
 }
 
 type SlackConfig struct {
-	ApiURL  string `yaml:"api_url"`
-	Channel string `yaml:""channel`
+	ApiURL     string      `yaml:"api_url"`
+	Channel    string      `yaml:""channel`
+	HttpConfig *HttpConfig `yaml:"http_config"`
+}
+
+type HttpConfig struct {
+	ProxyURL string `yaml:"proxy_url"`
 }
 
 type RouteRoot struct {
@@ -260,6 +266,38 @@ func (a *AlertmanagerConfig) CheckSlackApiURL() []error {
 	return errs
 }
 
+func (a *AlertmanagerConfig) CheckSlackHttpConfigProxyURL() []error {
+	var errs []error
+	for _, receiver := range a.Receivers {
+		for _, slackConfig := range receiver.SlackConfigs {
+			if slackConfig.HttpConfig == nil {
+				continue
+			}
+			_, err := url.Parse(slackConfig.HttpConfig.ProxyURL)
+			if err != nil {
+				errs = append(errs, fmt.Errorf("Receiver %s error with %s: %v", receiver.Name, slackConfig.HttpConfig.ProxyURL, err))
+			}
+		}
+	}
+	return errs
+}
+
+func (a *AlertmanagerConfig) CheckWebhookHttpConfigProxyURL() []error {
+	var errs []error
+	for _, receiver := range a.Receivers {
+		for _, webhookConfig := range receiver.WebhookConfigs {
+			if webhookConfig.HttpConfig == nil {
+				continue
+			}
+			_, err := url.Parse(webhookConfig.HttpConfig.ProxyURL)
+			if err != nil {
+				errs = append(errs, fmt.Errorf("Receiver %s error with %s: %v", receiver.Name, webhookConfig.HttpConfig.ProxyURL, err))
+			}
+		}
+	}
+	return errs
+}
+
 func lintConfig(file string) []error {
 	var errs []error
 	b, err := ioutil.ReadFile(file)
@@ -278,6 +316,8 @@ func lintConfig(file string) []error {
 	errs = append(errs, config.CheckSlackApiURL()...)
 	errs = append(errs, config.CheckWebhookURLs()...)
 	errs = append(errs, config.CheckEmailTo()...)
+	errs = append(errs, config.CheckSlackHttpConfigProxyURL()...)
+	errs = append(errs, config.CheckWebhookHttpConfigProxyURL()...)
 
 	return errs
 }
