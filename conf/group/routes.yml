@@ -1,4 +1,9 @@
 ---
-- match:
+- receiver: receiver
+  match:
     env: prod
-  receiver: receiver
+{{ range $route := .Group.Routes }}
+- receiver: group-{{ normalize $route.channel }}
+  match:
+{{ toYaml $route.match | indent 4 -}}
+{{ end }}

@@ -1,20 +1,16 @@
 package main
 
 import (
-	"bytes"
 	"flag"
 	"fmt"
 	"io/ioutil"
 	"os"
-	"strings"
-	"text/template"
 
 	yaml "gopkg.in/yaml.v2"
 )
 
 const (
-	BlockTemplate  = "#\n# File: %s\n%s\n"
-	TemplateOption = "missingkey=error"
+	BlockTemplate = "#\n# File: %s\n%s\n"
 )
 
 var (
@@ -26,17 +22,6 @@ var (
 
 	Version = "1.0.0"
 )
-
-func GenerateTemplate(filename string, data map[string]interface{}) (string, error) {
-	buf := bytes.NewBufferString("")
-	if tmpl, err := template.New(filename).Option(TemplateOption).Funcs(funcMap).ParseFiles([]string{filename}...); err != nil {
-		return "", fmt.Errorf("failed to parse template for %s: %v", filename, err)
-	} else if err := tmpl.Execute(buf, data); err != nil {
-		return "", fmt.Errorf("failed to execute template for %s: %v", filename, err)
-	}
-	result := strings.TrimRight(buf.String(), "\n")
-	return result, nil
-}
 
 func templateVars() (map[string]interface{}, error) {
 	vars, err := ValuesFromDirectory("./")
@@ -64,10 +49,12 @@ func renderTemplate(file string) (string, error) {
 
 func lintConfig(file string) []error {
 	var errs []error
+
 	b, err := ioutil.ReadFile(file)
 	if err != nil {
 		return []error{err}
 	}
+
 	config := &AlertmanagerConfig{}
 	if err := yaml.Unmarshal(b, &config); err != nil {
 		return []error{err}
@@ -82,6 +69,7 @@ func lintConfig(file string) []error {
 	errs = append(errs, config.CheckEmailTo()...)
 	errs = append(errs, config.CheckSlackHttpConfigProxyURL()...)
 	errs = append(errs, config.CheckWebhookHttpConfigProxyURL()...)
+	errs = append(errs, config.CheckDefaultReceiver()...)
 
 	return errs
 }

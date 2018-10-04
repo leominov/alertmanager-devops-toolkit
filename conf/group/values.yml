@@ -1,2 +1,14 @@
 # Group-level variables
-Channel: "#another-channel"
+Routes:
+  - channel: "#channel1"
+    match:
+      env: prod
+  - channel: "#channel2"
+    match:
+      env: dev
+  - channel: "#channel3"
+    match:
+      env: qa1
+  - channel: "#channel4"
+    match:
+      env: qa2

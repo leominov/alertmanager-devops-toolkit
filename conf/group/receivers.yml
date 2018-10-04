@@ -1,9 +1,13 @@
 ---
 - name: receiver
   slack_configs:
-    - channel: '{{.Values.Channel}}'
+    - channel: '{{ .Values.Channel }}'
       send_resolved: true
-    - channel: '{{.Group.Channel}}'
+{{ range $route := .Group.Routes }}
+- name: group-{{ normalize $route.channel }}
+  slack_configs:
+    - channel: '{{ $route.channel }}'
       send_resolved: true
       http_config:
         proxy_url: https://ya.ru
+{{ end }}
