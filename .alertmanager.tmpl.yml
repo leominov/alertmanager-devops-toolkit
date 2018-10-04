@@ -1,0 +1,18 @@
+---
+# yamllint disable rule:line-length
+# yamllint disable rule:trailing-spaces
+global:
+  # Required by email_configs
+  smtp_smarthost: test.host
+  smtp_from: from@host.com
+  # Required by slack_configs
+  slack_api_url: AABBCC
+receivers:
+  # User defined receivers
+{{ include "conf/*/receivers.yml" . | indent 2 }}
+route:
+  # Required by default
+  receiver: receiver
+  routes:
+    # User defined routes
+{{ include "conf/*/routes.yml" . | indent 4 }}

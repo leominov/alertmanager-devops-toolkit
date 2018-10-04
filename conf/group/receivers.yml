@@ -1,0 +1,5 @@
+---
+- name: receiver
+  slack_configs:
+    - channel: '#channel'
+      send_resolved: true
