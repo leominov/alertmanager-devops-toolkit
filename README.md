@@ -53,11 +53,11 @@ After rendering you got:
 ```
 ---
 receivers:
-  # conf/teamA/receivres.yml content
+  # conf/teamA/receivers.yml content
   ...
-  # conf/teamB/receivres.yml content
+  # conf/teamB/receivers.yml content
   ...
-  # conf/teamC/receivres.yml content
+  # conf/teamC/receivers.yml content
   ...
 route:
   receiver: receiver
