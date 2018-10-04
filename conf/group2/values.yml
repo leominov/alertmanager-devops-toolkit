@@ -1,0 +1,7 @@
+# Group-level variables
+Pref: group2
+Envs:
+  - prod
+  - dev
+  - stage
+  - test

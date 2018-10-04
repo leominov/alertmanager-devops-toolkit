@@ -1,0 +1,15 @@
+# Group-level variables
+Pref: group1
+Routes:
+  - match:
+      env: prod
+    notify: "#channel1"
+  - match:
+      env: dev
+    notify: "#channel2"
+  - match:
+      env: qa1
+    notify: "#channel3"
+  - match:
+      env: qa2
+    notify: "#channel4"

@@ -4,9 +4,9 @@
     - channel: '{{ .Values.Channel }}'
       send_resolved: true
 {{ range $route := .Group.Routes }}
-- name: group-{{ normalize $route.channel }}
+- name: {{ $.Group.Pref }}-{{ $route.match.env }}
   slack_configs:
-    - channel: '{{ $route.channel }}'
+    - channel: '{{ $route.notify }}'
       send_resolved: true
       http_config:
         proxy_url: https://ya.ru

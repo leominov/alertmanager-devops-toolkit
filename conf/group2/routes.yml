@@ -1,0 +1,6 @@
+---
+{{ range $env := .Group.Envs }}
+- receiver: {{ $.Group.Pref }}-{{ $env }}
+  match_re:
+    env: {{ $env }}
+{{ end }}

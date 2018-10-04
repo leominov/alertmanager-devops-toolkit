@@ -3,7 +3,7 @@
   match:
     env: prod
 {{ range $route := .Group.Routes }}
-- receiver: group-{{ normalize $route.channel }}
-  match:
+- receiver: {{ $.Group.Pref }}-{{ $route.match.env }}
+  match_re:
 {{ toYaml $route.match | indent 4 -}}
 {{ end }}

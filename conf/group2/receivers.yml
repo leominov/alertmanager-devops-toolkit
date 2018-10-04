@@ -1,0 +1,9 @@
+---
+{{ range $env := .Group.Envs }}
+- name: {{ $.Group.Pref }}-{{ $env }}
+  slack_configs:
+    - channel: '#{{ $.Group.Pref }}-{{ $env }}'
+      send_resolved: true
+      http_config:
+        proxy_url: https://ya.ru
+{{ end }}
