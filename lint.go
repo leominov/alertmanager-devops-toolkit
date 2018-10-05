@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func (a *AlertmanagerConfig) CheckReceivers() []error {
+func (a *AlertmanagerConfig) CheckRouteReceiverIsDefined() []error {
 	var errs []error
 	routeReceivers := make(map[string]bool)
 	// Add default receiver
@@ -84,7 +84,7 @@ func (a *AlertmanagerConfig) CheckEmailTo() []error {
 	return errs
 }
 
-func (a *AlertmanagerConfig) CheckRouteReceiver() []error {
+func (a *AlertmanagerConfig) CheckRouteHasReceiver() []error {
 	var errs []error
 	for id, route := range a.RouteRoot.Routes {
 		if len(route.Receiver) == 0 {
@@ -152,8 +152,8 @@ func (a *AlertmanagerConfig) CheckDefaultReceiver() []error {
 func (a *AlertmanagerConfig) Lint() []error {
 	var errs []error
 
-	errs = append(errs, a.CheckRouteReceiver()...)
-	errs = append(errs, a.CheckReceivers()...)
+	errs = append(errs, a.CheckRouteHasReceiver()...)
+	errs = append(errs, a.CheckRouteReceiverIsDefined()...)
 	errs = append(errs, a.CheckEmptyReceivers()...)
 	errs = append(errs, a.CheckSlackChannels()...)
 	errs = append(errs, a.CheckSlackApiURL()...)
