@@ -20,7 +20,7 @@ var (
 	RootConfigFile   = flag.String("lint-config", "alertmanager.yml", "Configuration file to lint")
 	ShowVersion      = flag.Bool("version", false, "Prints version and exit")
 
-	Version = "1.1.1"
+	Version = "1.1.2"
 )
 
 func templateVars() (map[string]interface{}, error) {
