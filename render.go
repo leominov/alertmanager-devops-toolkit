@@ -96,7 +96,7 @@ func Include(name string, data map[string]interface{}) (string, error) {
 	return result, nil
 }
 
-func GenerateTemplate(filename string, data map[string]interface{}) (string, error) {
+func Render(filename string, data map[string]interface{}) (string, error) {
 	buf := bytes.NewBufferString("")
 	if tmpl, err := template.New(filename).Option(TemplateOption).Funcs(funcMap).ParseFiles([]string{filename}...); err != nil {
 		return "", fmt.Errorf("failed to parse template for %s: %v", filename, err)

@@ -148,3 +148,20 @@ func (a *AlertmanagerConfig) CheckDefaultReceiver() []error {
 		errors.New("Default receiver doesn't found in list"),
 	}
 }
+
+func (a *AlertmanagerConfig) Lint() []error {
+	var errs []error
+
+	errs = append(errs, a.CheckRouteReceiver()...)
+	errs = append(errs, a.CheckReceivers()...)
+	errs = append(errs, a.CheckEmptyReceivers()...)
+	errs = append(errs, a.CheckSlackChannels()...)
+	errs = append(errs, a.CheckSlackApiURL()...)
+	errs = append(errs, a.CheckWebhookURLs()...)
+	errs = append(errs, a.CheckEmailTo()...)
+	errs = append(errs, a.CheckSlackHttpConfigProxyURL()...)
+	errs = append(errs, a.CheckWebhookHttpConfigProxyURL()...)
+	errs = append(errs, a.CheckDefaultReceiver()...)
+
+	return errs
+}

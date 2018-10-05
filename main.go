@@ -40,43 +40,28 @@ func renderTemplate(file string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	res, err := GenerateTemplate(file, vars)
+	res, err := Render(file, vars)
 	if err != nil {
 		return "", err
 	}
 	return res, nil
 }
 
-func lintConfig(file string) []error {
-	var errs []error
-
+func loadConfig(file string) (*AlertmanagerConfig, error) {
 	b, err := ioutil.ReadFile(file)
 	if err != nil {
-		return []error{err}
+		return nil, err
 	}
-
 	config := &AlertmanagerConfig{}
 	if err := yaml.Unmarshal(b, &config); err != nil {
-		return []error{err}
+		return nil, err
 	}
-
-	errs = append(errs, config.CheckRouteReceiver()...)
-	errs = append(errs, config.CheckReceivers()...)
-	errs = append(errs, config.CheckEmptyReceivers()...)
-	errs = append(errs, config.CheckSlackChannels()...)
-	errs = append(errs, config.CheckSlackApiURL()...)
-	errs = append(errs, config.CheckWebhookURLs()...)
-	errs = append(errs, config.CheckEmailTo()...)
-	errs = append(errs, config.CheckSlackHttpConfigProxyURL()...)
-	errs = append(errs, config.CheckWebhookHttpConfigProxyURL()...)
-	errs = append(errs, config.CheckDefaultReceiver()...)
-
-	return errs
+	return config, nil
 }
 
 func printsErrorArray(errs []error) {
 	for _, err := range errs {
-		fmt.Println(err)
+		fmt.Printf("[x] %v\n", err)
 	}
 }
 
@@ -95,7 +80,12 @@ func realMain() int {
 		fmt.Println(res)
 	}
 	if *LintTemplate {
-		errs := lintConfig(*RootConfigFile)
+		config, err := loadConfig(*RootConfigFile)
+		if err != nil {
+			fmt.Println(err)
+			return 2
+		}
+		errs := config.Lint()
 		if len(errs) != 0 {
 			printsErrorArray(errs)
 			return 2
