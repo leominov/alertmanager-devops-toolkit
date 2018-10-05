@@ -1,13 +1,11 @@
 ---
 - name: receiver
   slack_configs:
-    - channel: '{{ .Values.Channel }}'
-      send_resolved: true
+    - {{ template "slack_without_resolve" .Values.Channel }}
 {{ range $route := .Group.Routes }}
 - name: {{ $.Group.Pref }}-{{ $route.match.env }}
   slack_configs:
-    - channel: '{{ $route.notify }}'
-      send_resolved: true
-      http_config:
-        proxy_url: https://ya.ru
+    - {{ template "slack" $route.notify }}
 {{ end }}
+  webhook_config:
+    - {{ template "phone" .Values.Phone }}

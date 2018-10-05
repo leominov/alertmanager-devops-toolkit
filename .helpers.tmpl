@@ -1,0 +1,15 @@
+{{- define "proxy" -}}
+      http_config
+        proxy_url: http://ya.ru
+{{- end -}}
+
+{{- define "slack" -}}
+      channel: '{{ . }}'
+      send_resolved: true
+      {{ template "proxy" . }}
+{{- end -}}
+
+{{- define "slack_without_resolve" -}}
+      channel: '{{ . }}'
+      {{ template "proxy" . }}
+{{- end -}}

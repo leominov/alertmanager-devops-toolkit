@@ -9,9 +9,13 @@ import (
 	yaml "gopkg.in/yaml.v2"
 )
 
+const (
+	ValuesName = "values.yml"
+)
+
 func ValuesFromDirectory(dir string) (map[string]interface{}, error) {
 	var vars map[string]interface{}
-	filePath := path.Join(dir, "values.yml")
+	filePath := path.Join(dir, ValuesName)
 	b, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return vars, err
