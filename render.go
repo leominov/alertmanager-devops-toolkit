@@ -74,7 +74,7 @@ func Include(name string, data map[string]interface{}) (string, error) {
 		return "", err
 	}
 	if b, err := ioutil.ReadFile(HelpersName); err == nil {
-		helpers = string(b) + "\n"
+		helpers = "\n" + string(b)
 	}
 	// Can't use template.ParseFiles file names can be same
 	for _, file := range files {
@@ -84,14 +84,14 @@ func Include(name string, data map[string]interface{}) (string, error) {
 			data["Group"] = vars
 		}
 		if b, err := ioutil.ReadFile(path.Join(dir, HelpersName)); err == nil {
-			helpers += string(b) + "\n"
+			helpers += "\n" + string(b)
 		}
 		b, err := ioutil.ReadFile(file)
 		if err != nil {
 			return "", err
 		}
 		t := template.New(file).Option(TemplateOption).Funcs(funcMapBlock)
-		t, err = t.Parse(helpers + string(b))
+		t, err = t.Parse(string(b) + helpers)
 		if err != nil {
 			return "", err
 		}
