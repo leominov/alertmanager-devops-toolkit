@@ -20,7 +20,7 @@ var (
 	RootConfigFile   = flag.String("lint-config", "alertmanager.yml", "Configuration file to lint")
 	ShowVersion      = flag.Bool("version", false, "Prints version and exit")
 
-	Version = "1.1.2"
+	Version = "1.1.3"
 )
 
 func templateVars() (map[string]interface{}, error) {
@@ -61,7 +61,7 @@ func loadConfig(file string) (*AlertmanagerConfig, error) {
 
 func printsErrorArray(errs []error) {
 	for _, err := range errs {
-		fmt.Printf("[x] %v\n", err)
+		fmt.Fprintf(os.Stderr, "[x] %v\n", err)
 	}
 }
 
@@ -74,7 +74,7 @@ func realMain() int {
 	if *RenderTemplate {
 		res, err := renderTemplate(*RootTemplateFile)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Fprintln(os.Stderr, err)
 			return 1
 		}
 		fmt.Println(res)
@@ -82,7 +82,7 @@ func realMain() int {
 	if *LintTemplate {
 		config, err := loadConfig(*RootConfigFile)
 		if err != nil {
-			fmt.Println(err)
+			fmt.Fprintln(os.Stderr, err)
 			return 2
 		}
 		errs := config.Lint()
