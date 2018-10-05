@@ -149,6 +149,60 @@ func (a *AlertmanagerConfig) CheckDefaultReceiver() []error {
 	}
 }
 
+func (a *AlertmanagerConfig) CheckReceiverUniqueWebhookURL() []error {
+	var errs []error
+	for _, receiver := range a.Receivers {
+		links := make(map[string]bool)
+		if len(receiver.WebhookConfigs) == 0 {
+			continue
+		}
+		for _, webhookConfig := range receiver.WebhookConfigs {
+			_, ok := links[webhookConfig.URL]
+			if ok {
+				errs = append(errs, fmt.Errorf("Non-unique webhook URL %s in %s receiver", webhookConfig.URL, receiver.Name))
+			}
+			links[webhookConfig.URL] = true
+		}
+	}
+	return errs
+}
+
+func (a *AlertmanagerConfig) CheckReceiverUniqueSlackChannel() []error {
+	var errs []error
+	for _, receiver := range a.Receivers {
+		channels := make(map[string]bool)
+		if len(receiver.SlackConfigs) == 0 {
+			continue
+		}
+		for _, slackConfig := range receiver.SlackConfigs {
+			_, ok := channels[slackConfig.Channel]
+			if ok {
+				errs = append(errs, fmt.Errorf("Non-unique Slack channel %s in %s receiver", slackConfig.Channel, receiver.Name))
+			}
+			channels[slackConfig.Channel] = true
+		}
+	}
+	return errs
+}
+
+func (a *AlertmanagerConfig) CheckReceiverUniqueEmailTo() []error {
+	var errs []error
+	for _, receiver := range a.Receivers {
+		emails := make(map[string]bool)
+		if len(receiver.EmailConfigs) == 0 {
+			continue
+		}
+		for _, emailConfig := range receiver.EmailConfigs {
+			_, ok := emails[emailConfig.To]
+			if ok {
+				errs = append(errs, fmt.Errorf("Non-unique Email %s in %s receiver", emailConfig.To, receiver.Name))
+			}
+			emails[emailConfig.To] = true
+		}
+	}
+	return errs
+}
+
 func (a *AlertmanagerConfig) Lint() []error {
 	var errs []error
 
@@ -157,8 +211,11 @@ func (a *AlertmanagerConfig) Lint() []error {
 	errs = append(errs, a.CheckEmptyReceivers()...)
 	errs = append(errs, a.CheckSlackChannels()...)
 	errs = append(errs, a.CheckSlackApiURL()...)
+	errs = append(errs, a.CheckReceiverUniqueSlackChannel()...)
 	errs = append(errs, a.CheckWebhookURLs()...)
+	errs = append(errs, a.CheckReceiverUniqueWebhookURL()...)
 	errs = append(errs, a.CheckEmailTo()...)
+	errs = append(errs, a.CheckReceiverUniqueEmailTo()...)
 	errs = append(errs, a.CheckSlackHttpConfigProxyURL()...)
 	errs = append(errs, a.CheckWebhookHttpConfigProxyURL()...)
 	errs = append(errs, a.CheckDefaultReceiver()...)

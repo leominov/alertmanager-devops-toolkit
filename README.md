@@ -10,6 +10,8 @@
 * Only valid webhook URLs;
 * Only valid Email recipients.
 
+And some other.
+
 ### Usage
 
 ```

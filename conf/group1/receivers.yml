@@ -7,5 +7,5 @@
   slack_configs:
     - {{ template "slack" $route.notify }}
 {{ end }}
-  webhook_config:
+  webhook_configs:
     - {{ template "phone" .Values.Phone }}
