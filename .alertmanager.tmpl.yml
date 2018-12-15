@@ -3,7 +3,7 @@
 # yamllint disable rule:trailing-spaces
 global:
   # Required by slack_configs
-  slack_api_url: AABBCC
+  slack_api_url: {{.Env.SLACK_API_URL}}
 receivers:
   # User defined receivers
 {{ include "conf/*/receivers.yml" . | indent 2 }}
