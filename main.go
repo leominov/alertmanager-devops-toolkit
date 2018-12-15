@@ -15,7 +15,7 @@ const (
 
 var (
 	RenderTemplate     = flag.Bool("render", false, "Render template")
-	SafeRenderTemplate = flag.Bool("safe", true, "Render template with all included secrets")
+	SafeRenderTemplate = flag.Bool("safe", true, "Included all specified secrets")
 	RootTemplateFile   = flag.String("render-template", ".alertmanager.tmpl.yml", "Template file to render")
 	LintTemplate       = flag.Bool("lint", false, "Lint config")
 	RootConfigFile     = flag.String("lint-config", "alertmanager.yml", "Configuration file to lint")
