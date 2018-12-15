@@ -2,6 +2,8 @@
 
 ## Tool #1. Linter
 
+### Rules
+
 * All routes must contains receiver;
 * All receivers must be used;
 * Receivers must contains `slack_configs`, `email_configs` or `webhook_configs`;
