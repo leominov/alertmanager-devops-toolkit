@@ -23,7 +23,7 @@ And some other.
 
 ## Tool #2. Render
 
-Render given template, `include` and `indent` are supported, useful for categorization of receivers and routes. For example, you have an structure:
+Render given template, `include` and `indent` are supported, useful for categorization of receivers and routes (see [GitLab Code Owners](https://docs.gitlab.com/ee/user/project/code_owners.html) and [Atlassian Stash Approvers](https://github.com/leominov/atlas-hook#prwizard)). For example, you have an structure:
 
 ```
 conf/
