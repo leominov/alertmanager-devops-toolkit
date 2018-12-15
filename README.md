@@ -42,6 +42,8 @@ And template of configuration file:
 
 ```
 ---
+global:
+  slack_api_url: {{ .Env.SLACK_API_URL | secret }}
 receivers:
 {{ include "conf/*/receivers.yml" . | indent 2 }}
 route:
@@ -54,6 +56,8 @@ After rendering you got:
 
 ```
 ---
+global:
+  slack_api_url: http://slack.com/blablah
 receivers:
   # conf/teamA/receivers.yml content
   ...
@@ -79,4 +83,6 @@ route:
     Render template
 -render-template string
     Template file to render (default ".alertmanager.tmpl.yml")
+  -safe
+    Render template with all included secrets (default true)
 ```
