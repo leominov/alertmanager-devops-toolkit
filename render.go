@@ -26,14 +26,23 @@ var (
 		"toYaml":    ToYaml,
 		"fromYaml":  FromYaml,
 		"normalize": Normalize,
+		"secret":    Secret,
 	}
 	funcMapBlock = template.FuncMap{
 		"indent":    Indent,
 		"toYaml":    ToYaml,
 		"fromYaml":  FromYaml,
 		"normalize": Normalize,
+		"secret":    Secret,
 	}
 )
+
+func Secret(str string) string {
+	if *SafeRenderTemplate {
+		return str
+	}
+	return "<secret>"
+}
 
 func Normalize(str string) string {
 	return regexp.MustCompile("[^a-zA-Z0-9]+").ReplaceAllString(str, "")
