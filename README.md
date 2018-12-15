@@ -83,6 +83,6 @@ route:
     Render template
 -render-template string
     Template file to render (default ".alertmanager.tmpl.yml")
-  -safe
+-safe
     Render template with all included secrets (default true)
 ```
