@@ -9,9 +9,9 @@ release:
 	@./.release.sh
 
 lint:
-	@go build -o alertmanager-devops-toolkit
-	@./alertmanager-devops-toolkit --render --safe=false | cat -n
-	@./alertmanager-devops-toolkit --render > alertmanager.yml
+	@go build -o .build/alertmanager-devops-toolkit
+	@./.build/alertmanager-devops-toolkit --render --safe=false | cat -n
+	@./.build/alertmanager-devops-toolkit --render > alertmanager.yml
 	@echo "Result:"
 	@yamllint -s alertmanager.yml
-	@./alertmanager-devops-toolkit --lint
+	@./.build/alertmanager-devops-toolkit --lint
