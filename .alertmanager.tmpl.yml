@@ -4,6 +4,10 @@
 global:
   # Required by slack_configs
   slack_api_url: {{ .Env.SLACK_API_URL | secret }}
+  smtp_smarthost: {{ .Env.SMTP_HOST }}
+  smtp_from: {{ .Env.SMTP_FROM }}
+  smtp_auth_username: {{ .Env.SMTP_AUTH_USERNAME | secret }}
+  smtp_auth_password: {{ .Env.SMTP_AUTH_PASSWORD | secret }}
 receivers:
   # User defined receivers
 {{ include "conf/*/receivers.yml" . | indent 2 }}

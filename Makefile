@@ -1,10 +1,15 @@
-.PHONY: release lint
+export SLACK_API_URL=http://slack.com/blablah
+export SMTP_HOST=localhost
+export SMTP_FROM=no-reply@localhost.com
+export SMTP_AUTH_USERNAME=user
+export SMTP_AUTH_PASSWORD=pass
 
+.PHONY: release lint
 release:
 	@./.release.sh
 
 lint:
-	@SLACK_API_URL=http://slack.com/blablah go run *.go --render > alertmanager.yml
-	@cat -n alertmanager.yml
+	@go run *.go --render --safe=false | cat -n
+	@go run *.go --render > alertmanager.yml
 	@echo "Result:"
 	@go run *.go --lint
