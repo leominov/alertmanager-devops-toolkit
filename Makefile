@@ -12,4 +12,5 @@ lint:
 	@go run *.go --render --safe=false | cat -n
 	@go run *.go --render > alertmanager.yml
 	@echo "Result:"
+	@yamllint -s alertmanager.yml
 	@go run *.go --lint
