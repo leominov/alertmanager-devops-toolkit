@@ -14,4 +14,5 @@ lint:
 	@./.build/alertmanager-devops-toolkit --render > alertmanager.yml
 	@echo "Result:"
 	@yamllint -s alertmanager.yml
+	@amtool check-config alertmanager.yml
 	@./.build/alertmanager-devops-toolkit --lint

@@ -1,0 +1,4 @@
+---
+- name: group3
+  slack_configs:
+    - channel: '#group3-alerts'

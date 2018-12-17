@@ -1,0 +1,4 @@
+---
+- receiver: group3
+  match:
+    group: group3
