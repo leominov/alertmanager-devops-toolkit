@@ -1,6 +1,5 @@
 ---
-- receivers:
-    - receiver
+- receivers: receiver
   labels:
     env: prod
 - receivers:

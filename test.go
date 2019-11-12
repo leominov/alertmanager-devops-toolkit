@@ -12,7 +12,7 @@ import (
 )
 
 type RouteTest struct {
-	Receivers []string          `yaml:"receivers"`
+	Receivers StringSlice       `yaml:"receivers"`
 	Labels    map[string]string `yaml:"labels"`
 }
 
