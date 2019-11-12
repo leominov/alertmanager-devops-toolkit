@@ -1,0 +1,9 @@
+---
+- receivers:
+    - receiver
+  labels:
+    env: prod
+- receivers:
+    - group1-dev
+  labels:
+    env: dev

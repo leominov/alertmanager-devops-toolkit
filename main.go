@@ -18,10 +18,13 @@ var (
 	SafeRenderTemplate = flag.Bool("safe", true, "Included all specified secrets")
 	RootTemplateFile   = flag.String("render-template", ".alertmanager.tmpl.yml", "Template file to render")
 	LintTemplate       = flag.Bool("lint", false, "Lint config")
-	RootConfigFile     = flag.String("lint-config", "alertmanager.yml", "Configuration file to lint")
+	LintConfigFile     = flag.String("lint-config", "alertmanager.yml", "Configuration file to lint")
+	TestRoutes         = flag.Bool("test", false, "Test config")
+	TestConfigFile     = flag.String("test-config", "alertmanager.yml", "Configuration file to test")
+	TestDir            = flag.String("test-dir", "tests", "Directory with config tests")
 	ShowVersion        = flag.Bool("version", false, "Prints version and exit")
 
-	Version = "1.2.0"
+	Version = "1.3.0"
 )
 
 func templateVars() (map[string]interface{}, error) {
@@ -81,12 +84,20 @@ func realMain() int {
 		fmt.Println(res)
 	}
 	if *LintTemplate {
-		config, err := loadConfig(*RootConfigFile)
+		config, err := loadConfig(*LintConfigFile)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			return 2
 		}
 		errs := config.Lint()
+		if len(errs) != 0 {
+			printsErrorArray(errs)
+			return 2
+		}
+		fmt.Println("Looks good to me")
+	}
+	if *TestRoutes {
+		errs := RoutesTest(*TestConfigFile, *TestDir)
 		if len(errs) != 0 {
 			printsErrorArray(errs)
 			return 2

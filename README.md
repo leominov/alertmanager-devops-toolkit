@@ -88,3 +88,33 @@ route:
 -safe
     Included all specified secrets (default true)
 ```
+
+## Tool #3. Tests
+
+Wrapper for `amtool config routes test` command, arguments was stored in YAML-files.
+
+```
+tests/
+    groupA.yaml
+```
+
+`groupA.yaml` content:
+
+```
+---
+- receivers:
+    - group1-dev
+  labels:
+    env: dev
+```
+
+### Usage
+
+```
+-test
+    Test config
+-test-config string
+    Configuration file to test (default "alertmanager.yml")
+-test-dir string
+    Directory with config tests (default "tests")
+```
