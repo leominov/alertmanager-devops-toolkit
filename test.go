@@ -39,7 +39,7 @@ func (r *RouteTest) Test(config string) error {
 	return nil
 }
 
-func checkForExists(items []string) error {
+func CheckForExists(items []string) error {
 	for _, item := range items {
 		if _, err := os.Stat(item); os.IsNotExist(err) {
 			return err
@@ -48,7 +48,7 @@ func checkForExists(items []string) error {
 	return nil
 }
 
-func isRouteTestsFile(info os.FileInfo) bool {
+func IsRouteTestsFile(info os.FileInfo) bool {
 	if info.IsDir() {
 		return false
 	}
@@ -58,10 +58,10 @@ func isRouteTestsFile(info os.FileInfo) bool {
 	return true
 }
 
-func loadRouteTests(testDir string) ([]*RouteTest, error) {
+func LoadRouteTests(testDir string) ([]*RouteTest, error) {
 	tests := []*RouteTest{}
 	err := filepath.Walk(testDir, func(path string, info os.FileInfo, err error) error {
-		if !isRouteTestsFile(info) {
+		if !IsRouteTestsFile(info) {
 			return nil
 		}
 		b, err := ioutil.ReadFile(path)
@@ -80,10 +80,10 @@ func loadRouteTests(testDir string) ([]*RouteTest, error) {
 }
 
 func RoutesTest(config string, testDir string) []error {
-	if err := checkForExists([]string{config, testDir}); err != nil {
+	if err := CheckForExists([]string{config, testDir}); err != nil {
 		return []error{err}
 	}
-	tests, err := loadRouteTests(testDir)
+	tests, err := LoadRouteTests(testDir)
 	if err != nil {
 		return []error{err}
 	}

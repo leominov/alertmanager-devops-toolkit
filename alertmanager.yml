@@ -1,0 +1,127 @@
+---
+# yamllint disable rule:line-length
+# yamllint disable rule:trailing-spaces
+global:
+  # Required by slack_configs
+  slack_api_url: http://slack.com/blablah
+  smtp_smarthost: localhost:1234
+  smtp_from: no-reply@localhost.com
+  smtp_auth_username: user
+  smtp_auth_password: pass
+receivers:
+  # User defined receivers
+  #
+  # File: conf/group1/receivers.yml
+  - name: receiver
+    slack_configs:
+      - channel: '#channel'
+        http_config:
+          proxy_url: http://ya.ru
+  
+  - name: group1-prod
+    slack_configs:
+      - channel: '#channel1'
+        send_resolved: true
+        http_config:
+          proxy_url: http://ya.ru
+  
+  - name: group1-dev
+    slack_configs:
+      - channel: '#channel2'
+        send_resolved: true
+        http_config:
+          proxy_url: http://ya.ru
+  
+  - name: group1-qa1
+    slack_configs:
+      - channel: '#channel3'
+        send_resolved: true
+        http_config:
+          proxy_url: http://ya.ru
+  
+  - name: group1-qa2
+    slack_configs:
+      - channel: '#channel4'
+        send_resolved: true
+        http_config:
+          proxy_url: http://ya.ru
+  
+    webhook_configs:
+      - url: "http://phone-gateway.com/?phone=911"
+  #
+  # File: conf/group2/receivers.yml
+  
+  - name: group2-prod
+    slack_configs:
+      - channel: '#group2-prod'
+        send_resolved: true
+  
+  - name: group2-dev
+    slack_configs:
+      - channel: '#group2-dev'
+        send_resolved: true
+  
+  - name: group2-stage
+    slack_configs:
+      - channel: '#group2-stage'
+        send_resolved: true
+  
+  - name: group2-test
+    slack_configs:
+      - channel: '#group2-test'
+        send_resolved: true
+  #
+  # File: conf/group3/receivers.yml
+  - name: group3
+    slack_configs:
+      - channel: '#group3-alerts'
+route:
+  # Required by default
+  receiver: receiver
+  routes:
+    # User defined routes
+    #
+    # File: conf/group1/routes.yml
+    - receiver: receiver
+      match:
+        env: prod
+    
+    - receiver: group1-prod
+      match_re:
+        env: prod
+        
+    - receiver: group1-dev
+      match_re:
+        env: dev
+        
+    - receiver: group1-qa1
+      match_re:
+        env: qa1
+        
+    - receiver: group1-qa2
+      match_re:
+        env: qa2
+        
+    #
+    # File: conf/group2/routes.yml
+    
+    - receiver: group2-prod
+      match_re:
+        env: prod
+    
+    - receiver: group2-dev
+      match_re:
+        env: dev
+    
+    - receiver: group2-stage
+      match_re:
+        env: stage
+    
+    - receiver: group2-test
+      match_re:
+        env: test
+    #
+    # File: conf/group3/routes.yml
+    - receiver: group3
+      match:
+        group: group3

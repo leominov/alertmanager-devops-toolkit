@@ -1,3 +1,4 @@
 .build/
-alertmanager.yml
+./alertmanager.yml
 alertmanager-devops-toolkit
+coverage.txt
