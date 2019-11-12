@@ -60,6 +60,9 @@ func loadConfig(file string) (*AlertmanagerConfig, error) {
 	if err := yaml.Unmarshal(b, &config); err != nil {
 		return nil, err
 	}
+	if config.RouteRoot == nil {
+		config.RouteRoot = &RouteRoot{}
+	}
 	return config, nil
 }
 
