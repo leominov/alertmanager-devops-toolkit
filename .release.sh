@@ -21,5 +21,6 @@ for target in ${TARGETS[@]}; do
 done
 
 for target in ${TARGETS[@]}; do
+    filename="alertmanager-devops-toolkit-$VERSION.$target-amd64"
     dope nexus upload -d prometheus ".build/$filename"
 done
