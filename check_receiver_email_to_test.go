@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-func TestCheckEmailTo(t *testing.T) {
+func TestCheckReceiverEmailTo(t *testing.T) {
 	a := &AlertmanagerConfig{
 		Receivers: []*Receiver{
 			{
@@ -15,9 +15,9 @@ func TestCheckEmailTo(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckEmailTo(a)
+	errs := CheckReceiverEmailTo(a)
 	if len(errs) != 0 {
-		t.Error("CheckEmailTo() != 0")
+		t.Error("CheckReceiverEmailTo() != 0")
 	}
 	a = &AlertmanagerConfig{
 		Receivers: []*Receiver{
@@ -31,9 +31,9 @@ func TestCheckEmailTo(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckEmailTo(a)
+	errs = CheckReceiverEmailTo(a)
 	if len(errs) != 0 {
-		t.Error("CheckEmailTo() != 0")
+		t.Error("CheckReceiverEmailTo() != 0")
 	}
 	a = &AlertmanagerConfig{
 		Receivers: []*Receiver{
@@ -47,8 +47,8 @@ func TestCheckEmailTo(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckEmailTo(a)
+	errs = CheckReceiverEmailTo(a)
 	if len(errs) != 1 {
-		t.Error("CheckEmailTo() != 1")
+		t.Error("CheckReceiverEmailTo() != 1")
 	}
 }

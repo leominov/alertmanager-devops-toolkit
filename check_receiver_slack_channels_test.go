@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-func TestCheckSlackChannels(t *testing.T) {
+func TestCheckReceiverSlackChannels(t *testing.T) {
 	a := &AlertmanagerConfig{
 		Receivers: []*Receiver{
 			{
@@ -10,9 +10,9 @@ func TestCheckSlackChannels(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckSlackChannels(a)
+	errs := CheckReceiverSlackChannels(a)
 	if len(errs) != 0 {
-		t.Error("CheckSlackChannels() != 0")
+		t.Error("CheckReceiverSlackChannels() != 0")
 	}
 	a = &AlertmanagerConfig{
 		Receivers: []*Receiver{
@@ -26,9 +26,9 @@ func TestCheckSlackChannels(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckSlackChannels(a)
+	errs = CheckReceiverSlackChannels(a)
 	if len(errs) != 0 {
-		t.Error("CheckSlackChannels() != 0")
+		t.Error("CheckReceiverSlackChannels() != 0")
 	}
 	a = &AlertmanagerConfig{
 		Receivers: []*Receiver{
@@ -42,9 +42,9 @@ func TestCheckSlackChannels(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckSlackChannels(a)
+	errs = CheckReceiverSlackChannels(a)
 	if len(errs) != 0 {
-		t.Error("CheckSlackChannels() != 0")
+		t.Error("CheckReceiverSlackChannels() != 0")
 	}
 	a = &AlertmanagerConfig{
 		Receivers: []*Receiver{
@@ -58,8 +58,8 @@ func TestCheckSlackChannels(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckSlackChannels(a)
+	errs = CheckReceiverSlackChannels(a)
 	if len(errs) != 1 {
-		t.Error("CheckSlackChannels() != 1")
+		t.Error("CheckReceiverSlackChannels() != 1")
 	}
 }

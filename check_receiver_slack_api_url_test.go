@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-func TestCheckSlackApiURL(t *testing.T) {
+func TestCheckReceiverSlackApiURL(t *testing.T) {
 	a := &AlertmanagerConfig{
 		Receivers: []*Receiver{
 			{
@@ -15,9 +15,9 @@ func TestCheckSlackApiURL(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckSlackApiURL(a)
+	errs := CheckReceiverSlackApiURL(a)
 	if len(errs) != 0 {
-		t.Error("CheckSlackApiURL() != 0")
+		t.Error("CheckReceiverSlackApiURL() != 0")
 	}
 	a = &AlertmanagerConfig{
 		Receivers: []*Receiver{
@@ -31,8 +31,8 @@ func TestCheckSlackApiURL(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckSlackApiURL(a)
+	errs = CheckReceiverSlackApiURL(a)
 	if len(errs) != 1 {
-		t.Error("CheckSlackApiURL() != 1")
+		t.Error("CheckReceiverSlackApiURL() != 1")
 	}
 }

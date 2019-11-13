@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-func TestCheckSlackHttpConfigProxyURL(t *testing.T) {
+func TestCheckReceiverSlackHttpConfigProxyURL(t *testing.T) {
 	a := &AlertmanagerConfig{
 		Receivers: []*Receiver{
 			{
@@ -15,9 +15,9 @@ func TestCheckSlackHttpConfigProxyURL(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckSlackHttpConfigProxyURL(a)
+	errs := CheckReceiverSlackHttpConfigProxyURL(a)
 	if len(errs) != 0 {
-		t.Error("CheckSlackHttpConfigProxyURL() != 0")
+		t.Error("CheckReceiverSlackHttpConfigProxyURL() != 0")
 	}
 	a = &AlertmanagerConfig{
 		Receivers: []*Receiver{
@@ -34,8 +34,8 @@ func TestCheckSlackHttpConfigProxyURL(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckSlackHttpConfigProxyURL(a)
+	errs = CheckReceiverSlackHttpConfigProxyURL(a)
 	if len(errs) != 1 {
-		t.Error("CheckSlackHttpConfigProxyURL() != 1")
+		t.Error("CheckReceiverSlackHttpConfigProxyURL() != 1")
 	}
 }

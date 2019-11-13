@@ -2,7 +2,7 @@ package main
 
 import "testing"
 
-func TestCheckWebhookURLs(t *testing.T) {
+func TestCheckReceiverWebhookHttpConfigProxyURL(t *testing.T) {
 	a := &AlertmanagerConfig{
 		Receivers: []*Receiver{
 			{
@@ -15,9 +15,9 @@ func TestCheckWebhookURLs(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckWebhookURLs(a)
+	errs := CheckReceiverWebhookHttpConfigProxyURL(a)
 	if len(errs) != 0 {
-		t.Error("CheckWebhookURLs() != 0")
+		t.Error("CheckReceiverWebhookHttpConfigProxyURL() != 0")
 	}
 	a = &AlertmanagerConfig{
 		Receivers: []*Receiver{
@@ -25,14 +25,17 @@ func TestCheckWebhookURLs(t *testing.T) {
 				Name: "foobar",
 				WebhookConfigs: []*WebhookConfig{
 					{
-						URL: "http://[fe80::1%en0]/",
+						URL: "https://google.com",
+						HttpConfig: &HttpConfig{
+							ProxyURL: "http://[fe80::1%en0]/",
+						},
 					},
 				},
 			},
 		},
 	}
-	errs = CheckWebhookURLs(a)
+	errs = CheckReceiverWebhookHttpConfigProxyURL(a)
 	if len(errs) != 1 {
-		t.Error("CheckWebhookURLs() != 1")
+		t.Error("CheckReceiverWebhookHttpConfigProxyURL() != 1")
 	}
 }

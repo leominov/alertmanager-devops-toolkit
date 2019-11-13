@@ -5,7 +5,7 @@ import (
 	"net/url"
 )
 
-func CheckSlackHttpConfigProxyURL(a *AlertmanagerConfig) []error {
+func CheckReceiverSlackHttpConfigProxyURL(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, slackConfig := range receiver.SlackConfigs {

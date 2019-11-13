@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-func CheckSlackApiURL(a *AlertmanagerConfig) []error {
+func CheckReceiverSlackApiURL(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, slackConfig := range receiver.SlackConfigs {

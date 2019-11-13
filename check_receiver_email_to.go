@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func CheckEmailTo(a *AlertmanagerConfig) []error {
+func CheckReceiverEmailTo(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, emailConfig := range receiver.EmailConfigs {

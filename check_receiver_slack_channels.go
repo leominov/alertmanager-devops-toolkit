@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func CheckSlackChannels(a *AlertmanagerConfig) []error {
+func CheckReceiverSlackChannels(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, slackConfig := range receiver.SlackConfigs {

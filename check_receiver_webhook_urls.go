@@ -5,7 +5,7 @@ import (
 	"net/url"
 )
 
-func CheckWebhookURLs(a *AlertmanagerConfig) []error {
+func CheckReceiverWebhookURLs(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, webhookConfig := range receiver.WebhookConfigs {
