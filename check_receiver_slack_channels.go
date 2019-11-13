@@ -5,6 +5,10 @@ import (
 	"strings"
 )
 
+func init() {
+	RegisterCheck("receiver_slack_channels", CheckDefaultReceiver)
+}
+
 func CheckReceiverSlackChannels(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {

@@ -5,6 +5,10 @@ import (
 	"net/url"
 )
 
+func init() {
+	RegisterCheck("receiver_webhook_urls", CheckDefaultReceiver)
+}
+
 func CheckReceiverWebhookURLs(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {

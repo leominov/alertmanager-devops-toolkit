@@ -2,6 +2,10 @@ package main
 
 import "errors"
 
+func init() {
+	RegisterCheck("default_receiver", CheckDefaultReceiver)
+}
+
 func CheckDefaultReceiver(a *AlertmanagerConfig) []error {
 	for _, receiver := range a.Receivers {
 		if receiver.Name == a.RouteRoot.Receiver {
@@ -9,6 +13,6 @@ func CheckDefaultReceiver(a *AlertmanagerConfig) []error {
 		}
 	}
 	return []error{
-		errors.New("Default receiver doesn't found in list"),
+		errors.New("Default receiver wasn't found in list"),
 	}
 }

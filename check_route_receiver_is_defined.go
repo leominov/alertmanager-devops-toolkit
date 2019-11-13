@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+func init() {
+	RegisterCheck("route_receiver_is_defined", CheckDefaultReceiver)
+}
+
 func CheckRouteReceiverIsDefined(a *AlertmanagerConfig) []error {
 	var errs []error
 	routeReceivers := make(map[string]bool)
@@ -13,7 +17,7 @@ func CheckRouteReceiverIsDefined(a *AlertmanagerConfig) []error {
 	// All receivers must be used
 	for _, receiver := range a.Receivers {
 		if _, ok := routeReceivers[receiver.Name]; !ok {
-			errs = append(errs, fmt.Errorf("Receiver %s does't found in any route", receiver.Name))
+			errs = append(errs, fmt.Errorf("Receiver %s wasn't found in any route", receiver.Name))
 		}
 	}
 	return errs

@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+func init() {
+	RegisterCheck("receiver_unique_webhook_url", CheckDefaultReceiver)
+}
+
 func CheckReceiverUniqueWebhookURL(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {

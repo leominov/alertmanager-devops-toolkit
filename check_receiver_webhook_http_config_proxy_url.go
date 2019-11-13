@@ -5,6 +5,10 @@ import (
 	"net/url"
 )
 
+func init() {
+	RegisterCheck("receiver_webhook_http_config_proxy_url", CheckDefaultReceiver)
+}
+
 func CheckReceiverWebhookHttpConfigProxyURL(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {

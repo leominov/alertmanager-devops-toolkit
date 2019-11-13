@@ -6,6 +6,10 @@ import (
 	"strings"
 )
 
+func init() {
+	RegisterCheck("receiver_email_to", CheckDefaultReceiver)
+}
+
 func CheckReceiverEmailTo(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {

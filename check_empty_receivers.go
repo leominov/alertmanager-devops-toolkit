@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+func init() {
+	RegisterCheck("empty_receivers", CheckDefaultReceiver)
+}
+
 func CheckEmptyReceivers(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {

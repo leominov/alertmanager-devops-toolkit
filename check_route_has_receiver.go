@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+func init() {
+	RegisterCheck("route_has_receiver", CheckDefaultReceiver)
+}
+
 func CheckRouteHasReceiver(a *AlertmanagerConfig) []error {
 	var errs []error
 	for id, route := range a.RouteRoot.Routes {

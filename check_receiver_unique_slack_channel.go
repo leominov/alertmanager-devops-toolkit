@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+func init() {
+	RegisterCheck("receiver_unique_slack_channel", CheckDefaultReceiver)
+}
+
 func CheckReceiverUniqueSlackChannel(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {

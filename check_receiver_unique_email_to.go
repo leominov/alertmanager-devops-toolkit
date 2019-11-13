@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+func init() {
+	RegisterCheck("receiver_unique_email_to", CheckDefaultReceiver)
+}
+
 func CheckReceiverUniqueEmailTo(a *AlertmanagerConfig) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
