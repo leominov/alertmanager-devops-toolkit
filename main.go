@@ -24,7 +24,7 @@ var (
 	TestDir            = flag.String("test-dir", "tests", "Directory with config tests")
 	ShowVersion        = flag.Bool("version", false, "Prints version and exit")
 
-	Version = "1.3.4"
+	Version = "1.3.5"
 )
 
 func templateVars(dir string) (map[string]interface{}, error) {

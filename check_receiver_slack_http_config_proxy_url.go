@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	RegisterCheck("receiver_slack_http_config_proxy_url", CheckDefaultReceiver)
+	RegisterCheck("receiver_slack_http_config_proxy_url", CheckReceiverSlackHttpConfigProxyURL)
 }
 
 func CheckReceiverSlackHttpConfigProxyURL(a *AlertmanagerConfig) []error {
