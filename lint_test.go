@@ -394,6 +394,168 @@ func TestCheckReceiverUniqueEmailTo(t *testing.T) {
 	}
 }
 
+func TestCheckWebhookURLs(t *testing.T) {
+	a := &AlertmanagerConfig{
+		Receivers: []*Receiver{
+			{
+				Name: "foobar",
+				WebhookConfigs: []*WebhookConfig{
+					{
+						URL: "https://google.com",
+					},
+				},
+			},
+		},
+	}
+	errs := a.CheckWebhookURLs()
+	if len(errs) != 0 {
+		t.Error("CheckWebhookURLs() != 0")
+	}
+	a = &AlertmanagerConfig{
+		Receivers: []*Receiver{
+			{
+				Name: "foobar",
+				WebhookConfigs: []*WebhookConfig{
+					{
+						URL: "http://[fe80::1%en0]/",
+					},
+				},
+			},
+		},
+	}
+	errs = a.CheckWebhookURLs()
+	if len(errs) != 1 {
+		t.Error("CheckWebhookURLs() != 1")
+	}
+}
+
+func TestCheckSlackHttpConfigProxyURL(t *testing.T) {
+	a := &AlertmanagerConfig{
+		Receivers: []*Receiver{
+			{
+				Name: "foobar",
+				SlackConfigs: []*SlackConfig{
+					{
+						Channel: "@l.aminov",
+					},
+				},
+			},
+		},
+	}
+	errs := a.CheckSlackHttpConfigProxyURL()
+	if len(errs) != 0 {
+		t.Error("CheckSlackHttpConfigProxyURL() != 0")
+	}
+	a = &AlertmanagerConfig{
+		Receivers: []*Receiver{
+			{
+				Name: "foobar",
+				SlackConfigs: []*SlackConfig{
+					{
+						Channel: "@l.aminov",
+						HttpConfig: &HttpConfig{
+							ProxyURL: "http://[fe80::1%en0]/",
+						},
+					},
+				},
+			},
+		},
+	}
+	errs = a.CheckSlackHttpConfigProxyURL()
+	if len(errs) != 1 {
+		t.Error("CheckSlackHttpConfigProxyURL() != 1")
+	}
+}
+
+func TestCheckWebhookHttpConfigProxyURL(t *testing.T) {
+	a := &AlertmanagerConfig{
+		Receivers: []*Receiver{
+			{
+				Name: "foobar",
+				WebhookConfigs: []*WebhookConfig{
+					{
+						URL: "https://google.com",
+					},
+				},
+			},
+		},
+	}
+	errs := a.CheckWebhookHttpConfigProxyURL()
+	if len(errs) != 0 {
+		t.Error("CheckWebhookHttpConfigProxyURL() != 0")
+	}
+	a = &AlertmanagerConfig{
+		Receivers: []*Receiver{
+			{
+				Name: "foobar",
+				WebhookConfigs: []*WebhookConfig{
+					{
+						URL: "https://google.com",
+						HttpConfig: &HttpConfig{
+							ProxyURL: "http://[fe80::1%en0]/",
+						},
+					},
+				},
+			},
+		},
+	}
+	errs = a.CheckWebhookHttpConfigProxyURL()
+	if len(errs) != 1 {
+		t.Error("CheckWebhookHttpConfigProxyURL() != 1")
+	}
+}
+
+func TestCheckEmailTo(t *testing.T) {
+	a := &AlertmanagerConfig{
+		Receivers: []*Receiver{
+			{
+				Name: "foobar",
+				EmailConfigs: []*EmailConfig{
+					{
+						To: "",
+					},
+				},
+			},
+		},
+	}
+	errs := a.CheckEmailTo()
+	if len(errs) != 0 {
+		t.Error("CheckEmailTo() != 0")
+	}
+	a = &AlertmanagerConfig{
+		Receivers: []*Receiver{
+			{
+				Name: "foobar",
+				EmailConfigs: []*EmailConfig{
+					{
+						To: "foobar@gmail.com",
+					},
+				},
+			},
+		},
+	}
+	errs = a.CheckEmailTo()
+	if len(errs) != 0 {
+		t.Error("CheckEmailTo() != 0")
+	}
+	a = &AlertmanagerConfig{
+		Receivers: []*Receiver{
+			{
+				Name: "foobar",
+				EmailConfigs: []*EmailConfig{
+					{
+						To: "Joe Doe",
+					},
+				},
+			},
+		},
+	}
+	errs = a.CheckEmailTo()
+	if len(errs) != 1 {
+		t.Error("CheckEmailTo() != 1")
+	}
+}
+
 func TestList(t *testing.T) {
 	a := &AlertmanagerConfig{
 		RouteRoot: &RouteRoot{},

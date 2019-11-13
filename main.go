@@ -27,8 +27,8 @@ var (
 	Version = "1.3.1"
 )
 
-func templateVars() (map[string]interface{}, error) {
-	vars, err := ValuesFromDirectory("./")
+func templateVars(dir string) (map[string]interface{}, error) {
+	vars, err := ValuesFromDirectory(dir)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func templateVars() (map[string]interface{}, error) {
 }
 
 func renderTemplate(file string) (string, error) {
-	vars, err := templateVars()
+	vars, err := templateVars("./")
 	if err != nil {
 		return "", err
 	}

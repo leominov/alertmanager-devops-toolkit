@@ -68,10 +68,10 @@ func (a *AlertmanagerConfig) CheckEmailTo() []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, emailConfig := range receiver.EmailConfigs {
-			recipients := strings.Split(emailConfig.To, ",")
-			if len(recipients) == 0 {
+			if len(emailConfig.To) == 0 {
 				continue
 			}
+			recipients := strings.Split(emailConfig.To, ",")
 			for _, recipient := range recipients {
 				recipient = strings.TrimSpace(recipient)
 				_, err := mail.ParseAddress(recipient)
