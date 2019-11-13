@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	RegisterCheck("receiver_email_to", CheckDefaultReceiver)
+	RegisterCheck("receiver_email_to", CheckReceiverEmailTo)
 }
 
 func CheckReceiverEmailTo(a *AlertmanagerConfig) []error {

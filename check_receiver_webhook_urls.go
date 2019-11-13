@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	RegisterCheck("receiver_webhook_urls", CheckDefaultReceiver)
+	RegisterCheck("receiver_webhook_urls", CheckReceiverWebhookURLs)
 }
 
 func CheckReceiverWebhookURLs(a *AlertmanagerConfig) []error {

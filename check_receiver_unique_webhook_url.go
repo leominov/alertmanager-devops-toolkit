@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func init() {
-	RegisterCheck("receiver_unique_webhook_url", CheckDefaultReceiver)
+	RegisterCheck("receiver_unique_webhook_url", CheckReceiverUniqueWebhookURL)
 }
 
 func CheckReceiverUniqueWebhookURL(a *AlertmanagerConfig) []error {

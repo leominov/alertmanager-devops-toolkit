@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func init() {
-	RegisterCheck("route_has_receiver", CheckDefaultReceiver)
+	RegisterCheck("route_has_receiver", CheckRouteHasReceiver)
 }
 
 func CheckRouteHasReceiver(a *AlertmanagerConfig) []error {

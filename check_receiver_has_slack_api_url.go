@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func init() {
-	RegisterCheck("receiver_has_slack_api_url", CheckDefaultReceiver)
+	RegisterCheck("receiver_has_slack_api_url", CheckReceiverHasSlackApiURL)
 }
 
 func CheckReceiverHasSlackApiURL(a *AlertmanagerConfig) []error {

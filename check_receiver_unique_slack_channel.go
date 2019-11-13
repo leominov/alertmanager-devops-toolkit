@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func init() {
-	RegisterCheck("receiver_unique_slack_channel", CheckDefaultReceiver)
+	RegisterCheck("receiver_unique_slack_channel", CheckReceiverUniqueSlackChannel)
 }
 
 func CheckReceiverUniqueSlackChannel(a *AlertmanagerConfig) []error {

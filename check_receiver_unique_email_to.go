@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func init() {
-	RegisterCheck("receiver_unique_email_to", CheckDefaultReceiver)
+	RegisterCheck("receiver_unique_email_to", CheckReceiverUniqueEmailTo)
 }
 
 func CheckReceiverUniqueEmailTo(a *AlertmanagerConfig) []error {

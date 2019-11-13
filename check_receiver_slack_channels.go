@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	RegisterCheck("receiver_slack_channels", CheckDefaultReceiver)
+	RegisterCheck("receiver_slack_channels", CheckReceiverSlackChannels)
 }
 
 func CheckReceiverSlackChannels(a *AlertmanagerConfig) []error {

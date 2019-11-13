@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	RegisterCheck("receiver_webhook_http_config_proxy_url", CheckDefaultReceiver)
+	RegisterCheck("receiver_webhook_http_config_proxy_url", CheckReceiverWebhookHttpConfigProxyURL)
 }
 
 func CheckReceiverWebhookHttpConfigProxyURL(a *AlertmanagerConfig) []error {

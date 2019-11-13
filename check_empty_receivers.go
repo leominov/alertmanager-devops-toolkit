@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func init() {
-	RegisterCheck("empty_receivers", CheckDefaultReceiver)
+	RegisterCheck("empty_receivers", CheckEmptyReceivers)
 }
 
 func CheckEmptyReceivers(a *AlertmanagerConfig) []error {
