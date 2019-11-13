@@ -7,7 +7,7 @@ func Lint(a *AlertmanagerConfig) []error {
 	errs = append(errs, CheckRouteReceiverIsDefined(a)...)
 	errs = append(errs, CheckEmptyReceivers(a)...)
 	errs = append(errs, CheckReceiverSlackChannels(a)...)
-	errs = append(errs, CheckReceiverSlackApiURL(a)...)
+	errs = append(errs, CheckReceiverHasSlackApiURL(a)...)
 	errs = append(errs, CheckReceiverUniqueSlackChannel(a)...)
 	errs = append(errs, CheckReceiverWebhookURLs(a)...)
 	errs = append(errs, CheckReceiverUniqueWebhookURL(a)...)
