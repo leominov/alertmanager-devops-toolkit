@@ -92,7 +92,7 @@ func realMain() int {
 			fmt.Fprintln(os.Stderr, err)
 			return 2
 		}
-		errs := config.Lint()
+		errs := Lint(config)
 		if len(errs) != 0 {
 			printsErrorArray(errs)
 			return 2

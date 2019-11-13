@@ -3,8 +3,8 @@ package main
 import "testing"
 
 func TestList(t *testing.T) {
-	a := &AlertmanagerConfig{
+	config := &AlertmanagerConfig{
 		RouteRoot: &RouteRoot{},
 	}
-	a.Lint()
+	Lint(config)
 }

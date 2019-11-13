@@ -1,6 +1,6 @@
 package main
 
-func (a *AlertmanagerConfig) Lint() []error {
+func Lint(a *AlertmanagerConfig) []error {
 	var errs []error
 
 	errs = append(errs, CheckRouteHasReceiver(a)...)
