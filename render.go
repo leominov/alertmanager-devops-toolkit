@@ -131,3 +131,15 @@ func Render(filename string, data map[string]interface{}) (string, error) {
 	result := strings.TrimRight(buf.String(), "\n")
 	return result, nil
 }
+
+func InLineRender(text string) (string, error) {
+	buf := bytes.NewBufferString("")
+	tmpl := template.Must(template.New("tmpl").Parse(text))
+	err := tmpl.Execute(buf, nil)
+	if err != nil {
+		return "", err
+	}
+	out := buf.String()
+	out = strings.Replace(out, "<no value>", "empty", -1)
+	return out, nil
+}

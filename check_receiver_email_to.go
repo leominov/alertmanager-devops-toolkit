@@ -20,7 +20,11 @@ func CheckReceiverEmailTo(a *AlertmanagerConfig) []error {
 			recipients := strings.Split(emailConfig.To, ",")
 			for _, recipient := range recipients {
 				recipient = strings.TrimSpace(recipient)
-				_, err := mail.ParseAddress(recipient)
+				recipientParsed, err := InLineRender(recipient)
+				if err != nil {
+					errs = append(errs, fmt.Errorf("Failed to parse receiver %s email %s: %v", receiver.Name, recipient, err))
+				}
+				_, err = mail.ParseAddress(recipientParsed)
 				if err != nil {
 					errs = append(errs, fmt.Errorf("Receiver %s error with %s: %v", receiver.Name, recipient, err))
 				}
