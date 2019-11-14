@@ -18,7 +18,7 @@ func TestCheckReceiverUniqueWebhookURL(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckReceiverUniqueWebhookURL(a)
+	errs := CheckReceiverUniqueWebhookURL(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverUniqueWebhookURL() != 0")
 	}
@@ -29,7 +29,7 @@ func TestCheckReceiverUniqueWebhookURL(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverUniqueWebhookURL(a)
+	errs = CheckReceiverUniqueWebhookURL(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverUniqueWebhookURL() != 0")
 	}
@@ -48,7 +48,7 @@ func TestCheckReceiverUniqueWebhookURL(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverUniqueWebhookURL(a)
+	errs = CheckReceiverUniqueWebhookURL(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckReceiverUniqueWebhookURL() != 1")
 	}

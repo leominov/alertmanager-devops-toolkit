@@ -6,7 +6,7 @@ func init() {
 	RegisterCheck("receiver_unique_email_to", CheckReceiverUniqueEmailTo)
 }
 
-func CheckReceiverUniqueEmailTo(a *AlertmanagerConfig) []error {
+func CheckReceiverUniqueEmailTo(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		emails := make(map[string]bool)

@@ -9,7 +9,7 @@ func init() {
 	RegisterCheck("receiver_slack_channels", CheckReceiverSlackChannels)
 }
 
-func CheckReceiverSlackChannels(a *AlertmanagerConfig) []error {
+func CheckReceiverSlackChannels(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, slackConfig := range receiver.SlackConfigs {

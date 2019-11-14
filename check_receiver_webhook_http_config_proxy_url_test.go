@@ -15,7 +15,7 @@ func TestCheckReceiverWebhookHttpConfigProxyURL(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckReceiverWebhookHttpConfigProxyURL(a)
+	errs := CheckReceiverWebhookHttpConfigProxyURL(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverWebhookHttpConfigProxyURL() != 0")
 	}
@@ -34,7 +34,7 @@ func TestCheckReceiverWebhookHttpConfigProxyURL(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverWebhookHttpConfigProxyURL(a)
+	errs = CheckReceiverWebhookHttpConfigProxyURL(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckReceiverWebhookHttpConfigProxyURL() != 1")
 	}

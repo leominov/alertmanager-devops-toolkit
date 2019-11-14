@@ -15,7 +15,7 @@ func TestCheckReceiverWebhookURLs(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckReceiverWebhookURLs(a)
+	errs := CheckReceiverWebhookURLs(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverWebhookURLs() != 0")
 	}
@@ -31,7 +31,7 @@ func TestCheckReceiverWebhookURLs(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverWebhookURLs(a)
+	errs = CheckReceiverWebhookURLs(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckReceiverWebhookURLs() != 1")
 	}

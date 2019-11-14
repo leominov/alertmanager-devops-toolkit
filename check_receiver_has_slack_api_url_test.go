@@ -15,7 +15,7 @@ func TestCheckReceiverHasSlackApiURL(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckReceiverHasSlackApiURL(a)
+	errs := CheckReceiverHasSlackApiURL(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverHasSlackApiURL() != 0")
 	}
@@ -31,7 +31,7 @@ func TestCheckReceiverHasSlackApiURL(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverHasSlackApiURL(a)
+	errs = CheckReceiverHasSlackApiURL(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckReceiverHasSlackApiURL() != 1")
 	}

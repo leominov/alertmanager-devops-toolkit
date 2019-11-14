@@ -1,0 +1,4 @@
+---
+checks:
+  default_receiver:
+    active: true

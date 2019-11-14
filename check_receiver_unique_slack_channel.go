@@ -6,7 +6,7 @@ func init() {
 	RegisterCheck("receiver_unique_slack_channel", CheckReceiverUniqueSlackChannel)
 }
 
-func CheckReceiverUniqueSlackChannel(a *AlertmanagerConfig) []error {
+func CheckReceiverUniqueSlackChannel(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		channels := make(map[string]bool)

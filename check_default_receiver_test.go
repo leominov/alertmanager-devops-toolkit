@@ -13,7 +13,7 @@ func TestCheckDefaultReceiver(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckDefaultReceiver(a)
+	errs := CheckDefaultReceiver(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckDefaultReceiver() != 0")
 	}
@@ -27,7 +27,7 @@ func TestCheckDefaultReceiver(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckDefaultReceiver(a)
+	errs = CheckDefaultReceiver(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckDefaultReceiver() != 1")
 	}

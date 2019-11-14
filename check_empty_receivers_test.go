@@ -15,7 +15,7 @@ func TestCheckEmptyReceivers(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckEmptyReceivers(a)
+	errs := CheckEmptyReceivers(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckEmptyReceivers() != 0")
 	}
@@ -26,7 +26,7 @@ func TestCheckEmptyReceivers(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckEmptyReceivers(a)
+	errs = CheckEmptyReceivers(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckEmptyReceivers() != 1")
 	}

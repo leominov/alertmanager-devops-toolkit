@@ -9,7 +9,7 @@ func init() {
 	RegisterCheck("receiver_slack_http_config_proxy_url", CheckReceiverSlackHttpConfigProxyURL)
 }
 
-func CheckReceiverSlackHttpConfigProxyURL(a *AlertmanagerConfig) []error {
+func CheckReceiverSlackHttpConfigProxyURL(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, slackConfig := range receiver.SlackConfigs {

@@ -6,7 +6,7 @@ func init() {
 	RegisterCheck("route_has_receiver", CheckRouteHasReceiver)
 }
 
-func CheckRouteHasReceiver(a *AlertmanagerConfig) []error {
+func CheckRouteHasReceiver(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for id, route := range a.RouteRoot.Routes {
 		if len(route.Receiver) == 0 {

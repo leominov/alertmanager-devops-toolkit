@@ -9,7 +9,7 @@ func init() {
 	RegisterCheck("receiver_webhook_urls", CheckReceiverWebhookURLs)
 }
 
-func CheckReceiverWebhookURLs(a *AlertmanagerConfig) []error {
+func CheckReceiverWebhookURLs(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, webhookConfig := range receiver.WebhookConfigs {

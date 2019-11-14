@@ -6,7 +6,7 @@ func init() {
 	RegisterCheck("receiver_has_slack_api_url", CheckReceiverHasSlackApiURL)
 }
 
-func CheckReceiverHasSlackApiURL(a *AlertmanagerConfig) []error {
+func CheckReceiverHasSlackApiURL(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, slackConfig := range receiver.SlackConfigs {

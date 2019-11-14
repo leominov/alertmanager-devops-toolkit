@@ -6,7 +6,7 @@ func init() {
 	RegisterCheck("route_receiver_is_defined", CheckRouteReceiverIsDefined)
 }
 
-func CheckRouteReceiverIsDefined(a *AlertmanagerConfig) []error {
+func CheckRouteReceiverIsDefined(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	routeReceivers := make(map[string]bool)
 	// Add default receiver

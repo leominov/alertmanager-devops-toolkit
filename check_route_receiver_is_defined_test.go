@@ -17,7 +17,7 @@ func TestCheckRouteReceiverIsDefined(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckRouteReceiverIsDefined(a)
+	errs := CheckRouteReceiverIsDefined(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckRouteReceiverIsDefined() != 0")
 	}
@@ -35,7 +35,7 @@ func TestCheckRouteReceiverIsDefined(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckRouteReceiverIsDefined(a)
+	errs = CheckRouteReceiverIsDefined(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckRouteReceiverIsDefined() != 1")
 	}

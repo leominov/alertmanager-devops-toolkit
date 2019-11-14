@@ -9,7 +9,7 @@ func init() {
 	RegisterCheck("receiver_webhook_http_config_proxy_url", CheckReceiverWebhookHttpConfigProxyURL)
 }
 
-func CheckReceiverWebhookHttpConfigProxyURL(a *AlertmanagerConfig) []error {
+func CheckReceiverWebhookHttpConfigProxyURL(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, webhookConfig := range receiver.WebhookConfigs {

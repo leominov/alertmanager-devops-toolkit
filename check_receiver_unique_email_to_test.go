@@ -18,7 +18,7 @@ func TestCheckReceiverUniqueEmailTo(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckReceiverUniqueEmailTo(a)
+	errs := CheckReceiverUniqueEmailTo(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverUniqueEmailTo() != 0")
 	}
@@ -29,7 +29,7 @@ func TestCheckReceiverUniqueEmailTo(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverUniqueEmailTo(a)
+	errs = CheckReceiverUniqueEmailTo(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverUniqueEmailTo() != 0")
 	}
@@ -48,7 +48,7 @@ func TestCheckReceiverUniqueEmailTo(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverUniqueEmailTo(a)
+	errs = CheckReceiverUniqueEmailTo(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckReceiverUniqueEmailTo() != 1")
 	}

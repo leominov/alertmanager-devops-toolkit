@@ -17,7 +17,7 @@ func TestCheckRouteHasReceiver(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckRouteHasReceiver(a)
+	errs := CheckRouteHasReceiver(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckRouteHasReceiver() != 0")
 	}
@@ -35,7 +35,7 @@ func TestCheckRouteHasReceiver(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckRouteHasReceiver(a)
+	errs = CheckRouteHasReceiver(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckRouteHasReceiver() != 1")
 	}

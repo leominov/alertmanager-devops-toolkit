@@ -10,7 +10,7 @@ func TestCheckReceiverSlackChannels(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckReceiverSlackChannels(a)
+	errs := CheckReceiverSlackChannels(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverSlackChannels() != 0")
 	}
@@ -26,7 +26,7 @@ func TestCheckReceiverSlackChannels(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverSlackChannels(a)
+	errs = CheckReceiverSlackChannels(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverSlackChannels() != 0")
 	}
@@ -42,7 +42,7 @@ func TestCheckReceiverSlackChannels(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverSlackChannels(a)
+	errs = CheckReceiverSlackChannels(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverSlackChannels() != 0")
 	}
@@ -58,7 +58,7 @@ func TestCheckReceiverSlackChannels(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverSlackChannels(a)
+	errs = CheckReceiverSlackChannels(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckReceiverSlackChannels() != 1")
 	}

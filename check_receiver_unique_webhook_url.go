@@ -6,7 +6,7 @@ func init() {
 	RegisterCheck("receiver_unique_webhook_url", CheckReceiverUniqueWebhookURL)
 }
 
-func CheckReceiverUniqueWebhookURL(a *AlertmanagerConfig) []error {
+func CheckReceiverUniqueWebhookURL(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		links := make(map[string]bool)

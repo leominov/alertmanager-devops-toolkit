@@ -18,7 +18,7 @@ func TestCheckReceiverUniqueSlackChannel(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckReceiverUniqueSlackChannel(a)
+	errs := CheckReceiverUniqueSlackChannel(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverUniqueSlackChannel() != 0")
 	}
@@ -29,7 +29,7 @@ func TestCheckReceiverUniqueSlackChannel(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverUniqueSlackChannel(a)
+	errs = CheckReceiverUniqueSlackChannel(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverUniqueSlackChannel() != 0")
 	}
@@ -48,7 +48,7 @@ func TestCheckReceiverUniqueSlackChannel(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverUniqueSlackChannel(a)
+	errs = CheckReceiverUniqueSlackChannel(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckReceiverUniqueSlackChannel() != 1")
 	}

@@ -6,7 +6,7 @@ func init() {
 	RegisterCheck("default_receiver", CheckDefaultReceiver)
 }
 
-func CheckDefaultReceiver(a *AlertmanagerConfig) []error {
+func CheckDefaultReceiver(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	for _, receiver := range a.Receivers {
 		if receiver.Name == a.RouteRoot.Receiver {
 			return nil

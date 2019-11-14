@@ -10,7 +10,7 @@ func init() {
 	RegisterCheck("receiver_email_to", CheckReceiverEmailTo)
 }
 
-func CheckReceiverEmailTo(a *AlertmanagerConfig) []error {
+func CheckReceiverEmailTo(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		for _, emailConfig := range receiver.EmailConfigs {

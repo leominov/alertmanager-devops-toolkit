@@ -10,7 +10,8 @@ import (
 )
 
 const (
-	BlockTemplate = "#\n# File: %s\n%s\n"
+	BlockTemplate  = "#\n# File: %s\n%s\n"
+	ConfigFilename = ".alertmanager-devops-toolkit.yml"
 )
 
 var (
@@ -24,7 +25,7 @@ var (
 	TestDir            = flag.String("test-dir", "tests", "Directory with config tests")
 	ShowVersion        = flag.Bool("version", false, "Prints version and exit")
 
-	Version = "1.3.6"
+	Version = "1.3.7"
 )
 
 func templateVars(dir string) (map[string]interface{}, error) {
@@ -78,6 +79,11 @@ func realMain() int {
 		fmt.Println(Version)
 		return 0
 	}
+	config, err := LoadFromFile(ConfigFilename)
+	if err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		return 1
+	}
 	if *RenderTemplate {
 		res, err := renderTemplate(*RootTemplateFile)
 		if err != nil {
@@ -87,12 +93,12 @@ func realMain() int {
 		fmt.Println(res)
 	}
 	if *LintTemplate {
-		config, err := loadConfig(*LintConfigFile)
+		aconfig, err := loadConfig(*LintConfigFile)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 			return 2
 		}
-		errs := Lint(config)
+		errs := Lint(aconfig, config)
 		if len(errs) != 0 {
 			printsErrorArray(errs)
 			return 2

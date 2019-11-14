@@ -6,7 +6,7 @@ func init() {
 	RegisterCheck("empty_receivers", CheckEmptyReceivers)
 }
 
-func CheckEmptyReceivers(a *AlertmanagerConfig) []error {
+func CheckEmptyReceivers(a *AlertmanagerConfig, opt *CheckOptions) []error {
 	var errs []error
 	for _, receiver := range a.Receivers {
 		if receiver.EmailConfigs == nil && receiver.SlackConfigs == nil && receiver.WebhookConfigs == nil {

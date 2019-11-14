@@ -15,7 +15,7 @@ func TestCheckReceiverSlackHttpConfigProxyURL(t *testing.T) {
 			},
 		},
 	}
-	errs := CheckReceiverSlackHttpConfigProxyURL(a)
+	errs := CheckReceiverSlackHttpConfigProxyURL(a, defaultCheckOptions)
 	if len(errs) != 0 {
 		t.Error("CheckReceiverSlackHttpConfigProxyURL() != 0")
 	}
@@ -34,7 +34,7 @@ func TestCheckReceiverSlackHttpConfigProxyURL(t *testing.T) {
 			},
 		},
 	}
-	errs = CheckReceiverSlackHttpConfigProxyURL(a)
+	errs = CheckReceiverSlackHttpConfigProxyURL(a, defaultCheckOptions)
 	if len(errs) != 1 {
 		t.Error("CheckReceiverSlackHttpConfigProxyURL() != 1")
 	}
