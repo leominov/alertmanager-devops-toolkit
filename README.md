@@ -23,6 +23,41 @@ And some other.
     Configuration file to lint (default "alertmanager.yml")
 ```
 
+### Configuration
+
+You may disable rules by configuration file `.alertmanager-devops-toolkit.yml`:
+
+```
+---
+checks:
+  default_receiver:
+    active: false
+  empty_receivers:
+    active: false
+  receiver_email_to:
+    active: false
+  receiver_has_slack_api_url:
+    active: false
+  receiver_slack_channels:
+    active: false
+  receiver_slack_http_config_proxy_url:
+    active: false
+  receiver_unique_email_to:
+    active: false
+  receiver_unique_slack_channel:
+    active: false
+  receiver_unique_webhook_url:
+    active: false
+  receiver_webhook_http_config_proxy_url:
+    active: false
+  receiver_webhook_urls:
+    active: false
+  route_has_receiver:
+    active: false
+  route_receiver_is_defined:
+    active: false
+```
+
 ## Tool #2. Render
 
 Render given template, `include` and `indent` are supported, useful for categorization of receivers and routes (see [GitLab Code Owners](https://docs.gitlab.com/ee/user/project/code_owners.html) and [Atlassian Stash Approvers](https://github.com/leominov/atlas-hook#prwizard)). For example, you have an structure:
