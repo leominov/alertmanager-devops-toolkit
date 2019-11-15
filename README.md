@@ -27,7 +27,7 @@ And some other.
 
 You may disable rules by configuration file `.alertmanager-devops-toolkit.yml`:
 
-```
+```yaml
 ---
 checks:
   default_receiver:
@@ -77,7 +77,7 @@ conf/
 
 And template of configuration file:
 
-```
+```yaml
 ---
 global:
   slack_api_url: {{ .Env.SLACK_API_URL | secret }}
@@ -91,7 +91,7 @@ route:
 
 After rendering you got:
 
-```
+```yaml
 ---
 global:
   slack_api_url: http://slack.com/blablah
@@ -135,7 +135,7 @@ tests/
 
 `groupA.yaml` content:
 
-```
+```yaml
 ---
 - receivers:
     - group1-dev
@@ -152,4 +152,15 @@ tests/
     Configuration file to test (default "alertmanager.yml")
 -test-dir string
     Directory with config tests (default "tests")
+```
+
+### Configuration
+
+You may specify Glob-mask for test-files by setting up configuration file `.alertmanager-devops-toolkit.yml`:
+
+```yaml
+---
+testFiles:
+  - *-test.yaml
+  - *-test.yml
 ```

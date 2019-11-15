@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
 func TestRoutesTest(t *testing.T) {
 	tests := []struct {
@@ -29,9 +32,67 @@ func TestRoutesTest(t *testing.T) {
 		},
 	}
 	for _, test := range tests {
-		errs := RoutesTest(test.config, test.dir)
+		errs := RoutesTest(test.config, test.dir, []string{"*.yaml", "*.yml"})
 		if len(errs) != test.errors {
 			t.Errorf("len(RoutesTest()) == %d, want: %d", len(errs), test.errors)
+		}
+	}
+}
+
+func TestIsRouteTestsFile(t *testing.T) {
+	tests := []struct {
+		file      string
+		testFiles []string
+		want      bool
+	}{
+		{
+			file: ".alertmanager.tmpl.yml",
+			testFiles: []string{
+				"*.yml",
+			},
+			want: true,
+		},
+		{
+			file: ".alertmanager.tmpl.yml",
+			testFiles: []string{
+				"*.tmpl.yml",
+			},
+			want: true,
+		},
+		{
+			file: ".alertmanager.tmpl.yml",
+			testFiles: []string{
+				"*.foobar",
+				"*.tmpl.yml",
+			},
+			want: true,
+		},
+		{
+			file: ".alertmanager.tmpl.yml",
+			testFiles: []string{
+				"*.foobar",
+			},
+			want: false,
+		},
+		{
+			file:      "tests",
+			testFiles: []string{},
+			want:      false,
+		},
+		{
+			file:      ".alertmanager.tmpl.yml",
+			testFiles: nil,
+			want:      false,
+		},
+	}
+	for _, test := range tests {
+		info, err := os.Stat(test.file)
+		if err != nil {
+			t.Fatal(err)
+		}
+		result := IsRouteTestsFile(info, test.testFiles)
+		if result != test.want {
+			t.Errorf("IsRouteTestsFile() = %v, want = %v", result, test.want)
 		}
 	}
 }

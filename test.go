@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/gobwas/glob"
 	yaml "gopkg.in/yaml.v2"
 )
 
@@ -48,20 +49,23 @@ func CheckForExists(items []string) error {
 	return nil
 }
 
-func IsRouteTestsFile(info os.FileInfo) bool {
+func IsRouteTestsFile(info os.FileInfo, testFiles []string) bool {
 	if info.IsDir() {
 		return false
 	}
-	if !strings.HasSuffix(info.Name(), "yaml") && !strings.HasSuffix(info.Name(), "yml") {
-		return false
+	for _, checkFile := range testFiles {
+		g := glob.MustCompile(checkFile)
+		if g.Match(info.Name()) {
+			return true
+		}
 	}
-	return true
+	return false
 }
 
-func LoadRouteTests(testDir string) ([]*RouteTest, error) {
+func LoadRouteTests(testDir string, testFiles []string) ([]*RouteTest, error) {
 	tests := []*RouteTest{}
 	err := filepath.Walk(testDir, func(path string, info os.FileInfo, err error) error {
-		if !IsRouteTestsFile(info) {
+		if !IsRouteTestsFile(info, testFiles) {
 			return nil
 		}
 		b, err := ioutil.ReadFile(path)
@@ -79,11 +83,11 @@ func LoadRouteTests(testDir string) ([]*RouteTest, error) {
 	return tests, err
 }
 
-func RoutesTest(config string, testDir string) []error {
+func RoutesTest(config string, testDir string, testFiles []string) []error {
 	if err := CheckForExists([]string{config, testDir}); err != nil {
 		return []error{err}
 	}
-	tests, err := LoadRouteTests(testDir)
+	tests, err := LoadRouteTests(testDir, testFiles)
 	if err != nil {
 		return []error{err}
 	}

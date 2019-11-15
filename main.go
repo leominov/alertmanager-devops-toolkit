@@ -25,7 +25,7 @@ var (
 	TestDir            = flag.String("test-dir", "tests", "Directory with config tests")
 	ShowVersion        = flag.Bool("version", false, "Prints version and exit")
 
-	Version = "1.3.7"
+	Version = "1.3.8"
 )
 
 func templateVars(dir string) (map[string]interface{}, error) {
@@ -106,7 +106,7 @@ func realMain() int {
 		fmt.Println("Looks good to me")
 	}
 	if *TestRoutes {
-		errs := RoutesTest(*TestConfigFile, *TestDir)
+		errs := RoutesTest(*TestConfigFile, *TestDir, config.TestFiles)
 		if len(errs) != 0 {
 			printsErrorArray(errs)
 			return 2

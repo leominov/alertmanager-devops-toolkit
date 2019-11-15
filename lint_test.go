@@ -6,7 +6,7 @@ func TestList(t *testing.T) {
 	aconfig := &AlertmanagerConfig{
 		RouteRoot: &RouteRoot{},
 	}
-	Lint(aconfig, defaultConfig)
+	Lint(aconfig, DefaultConfig())
 	Lint(aconfig, &Config{
 		Checks: map[string]*CheckOptions{
 			"receiver_webhook_urls": &CheckOptions{
