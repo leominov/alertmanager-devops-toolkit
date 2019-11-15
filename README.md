@@ -156,7 +156,7 @@ tests/
 
 ### Configuration
 
-You may specify Glob-mask for test-files by setting up configuration file `.alertmanager-devops-toolkit.yml`:
+You may specify Glob-mask for test files by setting up configuration file `.alertmanager-devops-toolkit.yml`:
 
 ```yaml
 ---
