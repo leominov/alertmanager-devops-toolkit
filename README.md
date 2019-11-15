@@ -160,7 +160,8 @@ You may specify Glob-mask for test files by setting up configuration file `.aler
 
 ```yaml
 ---
+# Default: [*.yaml, *.yml]
 testFiles:
-  - *-test.yaml
-  - *-test.yml
+  - tests.yaml
+  - tests.yml
 ```
