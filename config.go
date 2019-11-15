@@ -12,7 +12,7 @@ type Config struct {
 	TestFiles []string                 `yaml:"testFiles"`
 }
 
-func (c *Config) SetDefaults() {
+func (c *Config) SetDefaults() *Config {
 	if c.Checks == nil {
 		c.Checks = make(map[string]*CheckOptions)
 	}
@@ -22,12 +22,11 @@ func (c *Config) SetDefaults() {
 			"*.yml",
 		}
 	}
+	return c
 }
 
 func DefaultConfig() *Config {
-	c := &Config{}
-	c.SetDefaults()
-	return c
+	return (&Config{}).SetDefaults()
 }
 
 func LoadFromFile(filename string) (*Config, error) {
@@ -43,6 +42,5 @@ func LoadFromFile(filename string) (*Config, error) {
 	if err != nil {
 		return nil, err
 	}
-	c.SetDefaults()
-	return c, nil
+	return c.SetDefaults(), nil
 }
