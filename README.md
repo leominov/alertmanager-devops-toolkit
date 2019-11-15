@@ -151,7 +151,7 @@ tests/
 -test-config string
     Configuration file to test (default "alertmanager.yml")
 -test-dir string
-    Directory with config tests (default "tests")
+    Directory with tests (default "tests")
 ```
 
 ### Configuration

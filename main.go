@@ -22,7 +22,7 @@ var (
 	LintConfigFile     = flag.String("lint-config", "alertmanager.yml", "Configuration file to lint")
 	TestRoutes         = flag.Bool("test", false, "Test config")
 	TestConfigFile     = flag.String("test-config", "alertmanager.yml", "Configuration file to test")
-	TestDir            = flag.String("test-dir", "tests", "Directory with config tests")
+	TestDir            = flag.String("test-dir", "tests", "Directory with tests")
 	ShowVersion        = flag.Bool("version", false, "Prints version and exit")
 
 	Version = "1.3.8"
