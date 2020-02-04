@@ -23,7 +23,7 @@ type EmailConfig struct {
 
 type SlackConfig struct {
 	ApiURL     string      `yaml:"api_url"`
-	Channel    string      `yaml:""channel`
+	Channel    string      `yaml:"channel"`
 	HttpConfig *HttpConfig `yaml:"http_config"`
 }
 
