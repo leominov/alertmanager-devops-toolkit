@@ -31,10 +31,10 @@ func TestRoutesTest(t *testing.T) {
 			errors: 1,
 		},
 	}
-	for _, test := range tests {
+	for id, test := range tests {
 		errs := RoutesTest(test.config, test.dir, []string{"*.yaml", "*.yml"})
 		if len(errs) != test.errors {
-			t.Errorf("len(RoutesTest()) == %d, want: %d", len(errs), test.errors)
+			t.Errorf("%d. len(RoutesTest()) == %d, want: %d", id, len(errs), test.errors)
 		}
 	}
 }
