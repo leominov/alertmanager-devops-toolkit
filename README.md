@@ -1,5 +1,8 @@
 # Alertmanager DevOps Toolkit
 
+[![Build Status](https://travis-ci.com/leominov/alertmanager-devops-toolkit.svg?branch=master)](https://travis-ci.com/leominov/alertmanager-devops-toolkit)
+[![codecov](https://codecov.io/gh/leominov/alertmanager-devops-toolkit/branch/master/graph/badge.svg)](https://codecov.io/gh/leominov/alertmanager-devops-toolkit)
+
 ## Tool #1. Linter
 
 ### Rules
